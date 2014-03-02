@@ -43,8 +43,10 @@ public class Sample {
 					handleEventTeams(console);
 				} else if(s.equals("event_matches")) {
 					handleEventMatches(console);
-				} else {
+				} else if(s.equals("exit")) {
 					run = false;
+				} else {
+					System.out.println("Unrecognized command.");
 				}
 				
 //				switch(s) {
@@ -70,6 +72,8 @@ public class Sample {
 			} catch (Exception e) {
 				System.out.println("Unknown exception. e: " + e.toString());
 			}
+			
+			System.out.println();
 		}
 	}
 	
@@ -85,9 +89,31 @@ public class Sample {
 			teamNumber = Integer.parseInt(teamNumberStr);
 		}
 		
+		Integer year = null;
+		
+		while(year == null)
+		{
+			System.out.println("Enter a year (optional):");
+			String yearStr = console.readLine();
+			
+			if(yearStr.length() == 0) break;
+			
+			year = Integer.parseInt(yearStr);
+		}
+		
 		BLUE.Teams.Team team = BLUE.Teams.getTeam(teamNumber);
 		
 		System.out.println(team);
+		
+		if(year != null)
+		{
+			BLUE.Events.Event[] events = team.getEvents(year);
+			
+			for(BLUE.Events.Event e : events)
+			{
+				System.out.println(e);
+			}
+		}
 	}
 	
 	private static void handleEvent(BufferedReader console)
