@@ -556,7 +556,7 @@ public class BLUE {
 		public static Event parseEvent(HashMap event) {
 			return new Event((String)event.get("key"), (String)event.get("name"), (String)event.get("short_name"),
 					(String)event.get("event_code"), (String)event.get("event_type_string"), (int)(long)(Long)event.get("event_type"),
-					(int)(long)(Long)event.get("year"), (String)event.get("location"), (boolean)event.get("official"));
+					(int)(long)(Long)event.get("year"), (String)event.get("location"), (Boolean)event.get("official"));
 		}
 		
 	}

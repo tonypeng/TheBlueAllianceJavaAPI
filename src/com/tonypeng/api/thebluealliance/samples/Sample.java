@@ -35,24 +35,36 @@ public class Sample {
 			
 			try
 			{
-				switch(s) {
-					case "team":
-						handleTeam(console);
-						break;
-					case "event":
-						handleEvent(console);
-						break;
-					case "event_teams":
-						handleEventTeams(console);
-						break;
-					case "event_matches":
-						handleEventMatches(console);
-						break;
-					case "exit":
-					default:
-						run = false;
-						break;
+				if(s.equals("team")) {
+					handleTeam(console);
+				} else if(s.equals("event")) {
+					handleEvent(console);
+				} else if(s.equals("event_teams")) {
+					handleEventTeams(console);
+				} else if(s.equals("event_matches")) {
+					handleEventMatches(console);
+				} else {
+					run = false;
 				}
+				
+//				switch(s) {
+//					case "team":
+//						handleTeam(console);
+//						break;
+//					case "event":
+//						handleEvent(console);
+//						break;
+//					case "event_teams":
+//						handleEventTeams(console);
+//						break;
+//					case "event_matches":
+//						handleEventMatches(console);
+//						break;
+//					case "exit":
+//					default:
+//						run = false;
+//						break;
+//				}
 			} catch (BLUEApiException e) {
 				System.out.println("API exception! e: " + e.toString());
 			} catch (Exception e) {
