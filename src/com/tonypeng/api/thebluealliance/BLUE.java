@@ -1,6 +1,6 @@
 /*
  * The Blue Alliance Java API - BLUE.java
- * Copyright (c) 2013 Tony "untitled" Peng.  All rights reserved.
+ * Copyright (c) 2014 Tony "untitled" Peng.  All rights reserved.
  * <http://www.tonypeng.com/>
  * 
  * This file is part of the The Blue Alliance Java API project <http://git.io/JiJQhg>
