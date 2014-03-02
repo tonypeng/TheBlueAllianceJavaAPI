@@ -29,6 +29,7 @@ public class BLUE {
 	/**
 	 * Describes an API exception.
 	 */
+	@SuppressWarnings("serial")
 	public static class BLUEApiException extends Exception {
 		Exception _innerException;
 		
@@ -280,6 +281,7 @@ public class BLUE {
 			 * @return Events that this team attended in <code>year</code>
 			 * @throws BLUEApiException
 			 */
+			@SuppressWarnings("rawtypes")
 			public Events.Event[] getEvents(int year)
 				throws BLUEApiException
 			{
@@ -312,6 +314,7 @@ public class BLUE {
 		 * @return The team with team number <code>teamNumber</code>, represented as a <code>Team</code>
 		 * @throws BLUEApiException
 		 */
+		@SuppressWarnings("rawtypes")
 		public static Team getTeam(int teamNumber)
 			throws BLUEApiException
 		{
@@ -333,6 +336,7 @@ public class BLUE {
 		 * @param obj The hashmap with data.
 		 * @return The hashmap represented as a <code>Team</code>
 		 */
+		@SuppressWarnings("rawtypes")
 		public static Team parseTeam(HashMap obj) {
 			return new Team((String)obj.get("website"), (String)obj.get("name"), (String)obj.get("locality"),
 					(String)obj.get("region"), (String)obj.get("country_name"), (String)obj.get("location"),
@@ -526,6 +530,7 @@ public class BLUE {
 		 * @return The event with event code <code>eventCode</code> in <code>year</code>.
 		 * @throws BLUEApiException
 		 */
+		@SuppressWarnings("rawtypes")
 		public static Event getEvent(String eventCode, int year)
 				throws BLUEApiException
 		{
@@ -547,6 +552,7 @@ public class BLUE {
 		 * @param obj The hashmap with data.
 		 * @return The hashmap represented as an <code>Event</code>
 		 */
+		@SuppressWarnings("rawtypes")
 		public static Event parseEvent(HashMap event) {
 			return new Event((String)event.get("key"), (String)event.get("name"), (String)event.get("short_name"),
 					(String)event.get("event_code"), (String)event.get("event_type_string"), (int)(long)(Long)event.get("event_type"),
@@ -717,6 +723,7 @@ public class BLUE {
 		 * @param obj The hashmap with data.
 		 * @return The hashmap represented as a <code>Match</code>
 		 */
+		@SuppressWarnings("rawtypes")
 		public static Match parseMatch(HashMap obj) {
 			JSONObject alliances = (JSONObject)obj.get("alliances");
 			
