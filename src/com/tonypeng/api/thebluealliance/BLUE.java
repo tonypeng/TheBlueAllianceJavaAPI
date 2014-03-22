@@ -10,16 +10,19 @@
 package com.tonypeng.api.thebluealliance;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**
  * Provides an interface for the The Blue Alliance REST API.
@@ -89,7 +92,7 @@ public class BLUE {
 		
 		try {
 			endpointUrl = new URL(endpoint);
-		} catch (Exception e) {
+		} catch (MalformedURLException e) {
 			throw new BLUEApiException("Malformed API request.", e);
 		}
 		
@@ -97,27 +100,27 @@ public class BLUE {
 		
 		try {
 			conn = (HttpURLConnection)endpointUrl.openConnection();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new BLUEApiException("Could not open connection.", e);
 		}
 		
 		try {
 			conn.setRequestMethod("GET");
-		} catch (Exception e) {
+		} catch (ProtocolException e) {
 			throw new BLUEApiException("Could not set the request type.", e);
 		}
 		
 		conn.setRequestProperty("X-TBA-App-Id", X_TBA_APP_ID);
 		conn.setUseCaches(false);
-		
+        
 		InputStream is;
 		BufferedReader reader;
 		
 		try {
 			is = conn.getInputStream();
 			reader = new BufferedReader(new InputStreamReader(is));
-		} catch (Exception e) {
-			throw new BLUEApiException("Error getting the input stream.", e);
+		} catch (IOException e) {
+			throw new BLUEApiException("Fatal! No internet!", e);
 		}
 		
 		String jsonString = "";
@@ -129,7 +132,7 @@ public class BLUE {
 			}
 			
 			reader.close();
-		} catch (Exception e) {
+		} catch (IOException e) {
 			throw new BLUEApiException("Error reading the response.", e);
 		}
 		
@@ -137,7 +140,7 @@ public class BLUE {
 		
 		try {
 			obj = parser.parse(jsonString);
-		} catch (Exception e) {
+		} catch (ParseException e) {
 			throw new BLUEApiException("Malformed response received.", e);
 		}
 		
@@ -287,11 +290,7 @@ public class BLUE {
 			{
 				HashMap obj;
 				
-				try {				
-					obj = (HashMap)BLUE.api("/team/" + _key + "/" + year);
-				} catch (Exception e) {
-					throw new BLUEApiException("Invalid response.", e);
-				}
+                obj = (HashMap)BLUE.api("/team/" + _key + "/" + year);
 				
 				JSONArray arr = (JSONArray)obj.get("events");
 				
@@ -322,11 +321,7 @@ public class BLUE {
 			
 			HashMap obj;
 			
-			try {				
-				obj = (HashMap)BLUE.api("/team/" + teamKey);
-			} catch (Exception e) {
-				throw new BLUEApiException("Invalid response.", e);
-			}
+            obj = (HashMap)BLUE.api("/team/" + teamKey);
 			
 			return parseTeam(obj);
 		}
@@ -479,11 +474,7 @@ public class BLUE {
 				
 				JSONArray arr;
 				
-				try {				
-					arr = (JSONArray)BLUE.api("/event/" + eventKey + "/teams");
-				} catch (Exception e) {
-					throw new BLUEApiException("Invalid response.", e);
-				}
+                arr = (JSONArray)BLUE.api("/event/" + eventKey + "/teams");
 				
 				Teams.Team[] teams = new Teams.Team[arr.size()];
 				
@@ -507,11 +498,7 @@ public class BLUE {
 				
 				JSONArray arr;
 				
-				try {				
-					arr = (JSONArray)BLUE.api("/event/" + eventKey + "/matches");
-				} catch (Exception e) {
-					throw new BLUEApiException("Invalid response.", e);
-				}
+                arr = (JSONArray)BLUE.api("/event/" + eventKey + "/matches");
 				
 				Matches.Match[] matches = new Matches.Match[arr.size()];
 				
@@ -538,11 +525,7 @@ public class BLUE {
 			
 			HashMap obj;
 			
-			try {				
-				obj = (HashMap)BLUE.api("/event/" + eventKey);
-			} catch (Exception e) {
-				throw new BLUEApiException("Invalid response.", e);
-			}
+            obj = (HashMap)BLUE.api("/event/" + eventKey);
 			
 			return parseEvent(obj);
 		}

@@ -9,13 +9,12 @@
 
 package com.tonypeng.api.thebluealliance.samples;
 
+import com.tonypeng.api.thebluealliance.BLUE;
+import com.tonypeng.api.thebluealliance.BLUE.BLUEApiException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-
-import com.tonypeng.api.thebluealliance.BLUE;
-import com.tonypeng.api.thebluealliance.BLUE.BLUEApiException;
 
 public class Sample {
 	public static void main(String[] args)
@@ -48,30 +47,13 @@ public class Sample {
 				} else {
 					System.out.println("Unrecognized command.");
 				}
-				
-//				switch(s) {
-//					case "team":
-//						handleTeam(console);
-//						break;
-//					case "event":
-//						handleEvent(console);
-//						break;
-//					case "event_teams":
-//						handleEventTeams(console);
-//						break;
-//					case "event_matches":
-//						handleEventMatches(console);
-//						break;
-//					case "exit":
-//					default:
-//						run = false;
-//						break;
-//				}
 			} catch (BLUEApiException e) {
-				System.out.println("API exception! e: " + e.toString());
-			} catch (Exception e) {
+				System.out.println("API exception! " + e.toString());
+			} catch (IOException e) {
 				System.out.println("Unknown exception. e: " + e.toString());
-			}
+			} catch (NumberFormatException e) {
+                System.out.println(e.getMessage() + " is not a number.");
+            }
 			
 			System.out.println();
 		}

@@ -41,3 +41,10 @@ local.properties
 .classpath
 
 .project
+
+# Netbeans
+build.xml
+build/
+manifest.mf
+dist/
+nbproject/
